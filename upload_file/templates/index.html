@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/script.js' %}" defer></script>
+</head>
+<body>
+    <main>
+        <!-- o url do arquivo upload_file -->
+         <!-- sem o enctype o envio dos arquivos não funcionam e obrigatoriamente tem que ter o multipart/form-data-->
+          <!-- {%csrf_token%} validação de segurança do django -->
+        <form action="{% url 'upload_file' %}" method="POST" enctype="multipart/form-data"> {%csrf_token%} 
+            <!-- {% url 'upload_file' %} esse nome tem que ser identico ao name que esta na url, name="upload_file" -->
+            <label>insira o arquivo</label>
+            <input type="file" name="my_file">
+            <input type="submit" value="enviar">
+        </form>
+        
+        <div id="popup">
+           Upload realizado com sucesso!
+        </div>
+        
+        <!-- Passando a variável 'success' para o JavaScript -->
+        <div id="success-data" data-success="{{ success|yesno:'true,false' }}" style="display:none;"></div>
+        
+    </main>
+
+</body>
+</html>
